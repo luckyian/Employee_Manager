@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const console = require("console.table");
-const myfunct = require("functions.js")
+const consoleTable = require("console.table");
+const functions = require("functions.js");
 
 
 const connection = mysql.createConnection({
@@ -20,10 +20,10 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
   if (err) throw err;
-  runSearch();
+  runEmployeeData();
 });
 
-function runSearch() {
+function runEmployeeData() {
   inquirer
     .prompt({
       name: "action",
