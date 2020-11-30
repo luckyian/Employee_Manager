@@ -1,0 +1,30 @@
+{
+  "name": "employee_manager",
+  "version": "1.0.0",
+  "description": "employee manager that uses inquirer and my sql",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luckyian/Employee_Manager.git"
+  },
+  "keywords": [
+    "mysql",
+    "inquirer",
+    "employee",
+    "database"
+  ],
+  "author": "Ian Wren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luckyian/Employee_Manager/issues"
+  },
+  "homepage": "https://github.com/luckyian/Employee_Manager#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
+}
