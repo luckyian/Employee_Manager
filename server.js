@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "",
-  database: "top_songsDB"
+  database: "employee-databaseDB"
 });
 
 connection.connect(function(err) {
@@ -27,11 +27,11 @@ function runSearch() {
       type: "rawlist",
       message: "What would you like to do?",
       choices: [
-        "Find songs by artist",
-        "Find all artists who appear more than once",
-        "Find data within a specific range",
-        "Search for a specific song",
-        "Find artists with a top song and top album in the same year"
+        "View All Employees",
+        "View All Employees by Department",
+        "View All Employees by Manager",
+        "Add Employee",
+        "Remove Employee"
       ]
     })
     .then(function(answer) {
