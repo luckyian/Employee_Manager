@@ -31,30 +31,79 @@ function runSearch() {
         "View All Employees by Department",
         "View All Employees by Manager",
         "Add Employee",
-        "Remove Employee"
+        "Remove Employee",
+        "Update Employee Role",
+        "Update Employee Manager",
+        "View All Roles",
+        "Add Role",
+        "Remove Role",
+        "View All Departments",
+        "Add Department",
+        "Remove Department",
+        "View Total Budget"
+
+
       ]
     })
     .then(function(answer) {
       switch (answer.action) {
-      case "Find songs by artist":
-        artistSearch();
+      case "View All Employees":
+        employeeSearch();
         break;
 
-      case "Find all artists who appear more than once":
-        multiSearch();
+      case "View All Employees by Department":
+        employeeDeptSearch();
         break;
 
-      case "Find data within a specific range":
-        rangeSearch();
+      case "View All Employees by Manager":
+        employeeMangSearch();
         break;
 
-      case "Search for a specific song":
-        songSearch();
+      case "Add Employee":
+        addEmpSearch();
         break;
 
-      case "Find artists with a top song and top album in the same year":
-        songAndAlbumSearch();
+      case "Remove Employee":
+        removeEmpSearch();
         break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+        case "Remove Employee":
+        removeEmpSearch();
+        break;
+
+
       }
     });
 }
