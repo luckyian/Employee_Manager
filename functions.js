@@ -1,4 +1,4 @@
-function artistSearch() {
+function employeeSearch() {
     inquirer
       .prompt({
         name: "artist",
@@ -11,7 +11,7 @@ function artistSearch() {
           for (const i = 0; i < res.length; i++) {
             console.log("Position: " + res[i].position + " || Song: " + res[i].song + " || Year: " + res[i].year);
           }
-          runSearch();
+          runEmployeeData();
         });
       });
   }
