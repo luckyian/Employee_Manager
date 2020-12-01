@@ -32,41 +32,60 @@ function employeeMangSearch() {
 }
 
 function addEmpSearch() {
-  connection.query("INSERT INTO employee SET ?", function (err, result) {
-  
+  inquirer.prompt([
     {
-      first_name: "Rocky Road",
-      last_name: "Ice Cream",
-      role_id: 50,
-      manager_id: 2
-    }
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-      runEmployeeData();
-    }
-  });
+
+      type: "input",
+      message: "What is the employee's first name?",
+      name: "first_name"
+
+    },
+
+    {
+
+      type: "input",
+      message: "What is the employee's last name?",
+      name: "last_name"
+
+    },
+
+
+  ])
+    .then(connection.query("INSERT INTO employee SET ?", function (err, result) {
+
+      {
+        first_name: this.first_name,
+          last_name: this.last_name,
+            role_id: 50,
+              manager_id: 2
+      }
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        runEmployeeData();
+      }
+    });
 }
 
 function removeEmpSearch() {
   connection.query("DELETE FROM employee WHERE ?", function (err, result) {
     {
       first_name: "Test",
-      last_name: "Test2"
+        last_name: "Test2"
     }
-    
-      if (err) throw err;
-      console.log(res.affectedRows + " employee deleted!\n");
-      // Call runEmployeeData AFTER the DELETE completes
-      runEmployeeData();
-    }
+
+    if (err) throw err;
+    console.log(res.affectedRows + " employee deleted!\n");
+    // Call runEmployeeData AFTER the DELETE completes
+    runEmployeeData();
+  }
   );
 }
 
 function updateEmpRoleSearch() {
   connection.query("UPDATE employee SET ? WHERE ?", function (err, result) {
-   
+
     [
       {
         role_id: 20
@@ -83,7 +102,7 @@ function updateEmpRoleSearch() {
 
 function updateEmpMangSearch() {
   connection.query("UPDATE employee SET ? WHERE ?", function (err, result) {
-   
+
     [
       {
         manager_id: 2
@@ -97,7 +116,7 @@ function updateEmpMangSearch() {
     }
   });
 }
-}
+
 
 function rolesSearch() {
   connection.query("SELECT * FROM role", function (err, result) {
@@ -111,21 +130,39 @@ function rolesSearch() {
 }
 
 function addRoleSearch() {
-  connection.query("INSERT INTO role SET ?", function (err, result) {
-  
+  inquirer.prompt(
     {
-      role: "Developer",
-      salary: 120000,
-      department_id: 50,
+
+      type: "input",
+      message: "What is the role's name?",
+      name: "role"
+
+    },
+
+    {
+
+      type: "input",
+      message: "What is the role's salary?",
+      name: "salary"
+
+    }
+
+  )
+    .then(connection.query("INSERT INTO role SET ?", function (err, result) {
+
+      {
+        role: this.role,
+        salary: parseInt(this.salary),
+        department_id: 50,
      
     }
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-      runEmployeeData();
-    }
-  });
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        runEmployeeData();
+      }
+    });
 }
 
 
@@ -134,12 +171,12 @@ function removeRoleSearch() {
     {
       name: "Example"
     }
-    
-      if (err) throw err;
-      console.log(res.affectedRows + " role deleted!\n");
-      // Call runEmployeeData AFTER the DELETE completes
-      runEmployeeData();
-    }
+
+    if (err) throw err;
+    console.log(res.affectedRows + " role deleted!\n");
+    // Call runEmployeeData AFTER the DELETE completes
+    runEmployeeData();
+  }
   );
 }
 
@@ -155,19 +192,28 @@ function deptSearch() {
 }
 
 function addDeptSearch() {
-  connection.query("INSERT INTO department SET ?", function (err, result) {
-  
+  inquirer.prompt(
     {
-      name: "Rocky Road"
-     
-    }
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-      runEmployeeData();
-    }
-  });
+
+      type: "input",
+      message: "What is the department's name?",
+      name: "name"
+
+    },
+  
+   }).then(connection.query("INSERT INTO department SET ?", function (err, result) {
+
+      {
+        name: "Rocky Road"
+
+      }
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        runEmployeeData();
+      }
+    });
 
 }
 
@@ -176,12 +222,12 @@ function removeDeptSearch() {
     {
       name: "Example2"
     }
-    
-      if (err) throw err;
-      console.log(res.affectedRows + " department deleted!\n");
-      // Call runEmployeeData AFTER the DELETE completes
-      runEmployeeData();
-    }
+
+    if (err) throw err;
+    console.log(res.affectedRows + " department deleted!\n");
+    // Call runEmployeeData AFTER the DELETE completes
+    runEmployeeData();
+  }
   );
 }
 
