@@ -47,34 +47,36 @@ function addEmpSearch() {
       message: "What is the employee's last name?",
       name: "last_name"
 
-    },
+    }
 
 
   ])
     .then(connection.query("INSERT INTO employee SET ?", function (err, result) {
+      [
 
-      {
-        first_name: this.first_name,
+        {
+          first_name: this.first_name,
           last_name: this.last_name,
-            role_id: 50,
-              manager_id: 2
-      }
+          role_id: 50,
+          manager_id: 2
+        }]
       if (err) {
         console.log(err);
       } else {
         console.log(result);
         runEmployeeData();
       }
-    });
+    })
 }
 
 function removeEmpSearch() {
   connection.query("DELETE FROM employee WHERE ?", function (err, result) {
-    {
-      first_name: "Test",
+    [
+      {
+        first_name: "Test",
         last_name: "Test2"
-    }
-
+      }
+    ]
     if (err) throw err;
     console.log(res.affectedRows + " employee deleted!\n");
     // Call runEmployeeData AFTER the DELETE completes
@@ -149,20 +151,20 @@ function addRoleSearch() {
 
   )
     .then(connection.query("INSERT INTO role SET ?", function (err, result) {
+      [
+        {
+          role: this.role,
+          salary: parseInt(this.salary),
+          department_id: 50,
 
-      {
-        role: this.role,
-        salary: parseInt(this.salary),
-        department_id: 50,
-     
-    }
+        }]
       if (err) {
         console.log(err);
       } else {
         console.log(result);
         runEmployeeData();
       }
-    });
+    })
 }
 
 
@@ -193,14 +195,14 @@ function deptSearch() {
 
 function addDeptSearch() {
   inquirer.prompt(
-    {
+    [{
 
       type: "input",
       message: "What is the department's name?",
       name: "name"
 
-    },
-  
+    }
+    ]
    }).then(connection.query("INSERT INTO department SET ?", function (err, result) {
 
       {
@@ -213,31 +215,31 @@ function addDeptSearch() {
         console.log(result);
         runEmployeeData();
       }
-    });
+    })
 
 }
 
-function removeDeptSearch() {
-  connection.query("DELETE FROM department WHERE ?", function (err, result) {
-    {
-      name: "Example2"
-    }
-
-    if (err) throw err;
-    console.log(res.affectedRows + " department deleted!\n");
-    // Call runEmployeeData AFTER the DELETE completes
-    runEmployeeData();
-  }
-  );
-}
+      function removeDeptSearch() {
+        connection.query("DELETE FROM department WHERE ?", function (err, result) {
+          [{
+            name: "Example2"
+          }
+          ]
+          if (err) throw err;
+          console.log(res.affectedRows + " department deleted!\n");
+          // Call runEmployeeData AFTER the DELETE completes
+          runEmployeeData();
+        }
+        );
+      }
 
 function totalBudgetSearch() {
-  connection.query("SELECT * FROM employee", function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-      runEmployeeData();
-    }
-  });
-}
+        connection.query("SELECT * FROM employee", function (err, result) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(result);
+            runEmployeeData();
+          }
+        });
+      }
