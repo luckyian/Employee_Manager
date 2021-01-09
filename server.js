@@ -4,24 +4,24 @@ const consoleTable = require("console.table");
 const functions = require("functions.js");
 
 
-const connection = mysql.createConnection({
-  host: "localhost",
+// const connection = mysql.createConnection({
+//   host: "localhost",
 
-  // Your port; if not 3306
-  port: 3306,
+//   // Your port; if not 3306
+//   port: 3306,
 
-  // Your username
-  user: "root",
+//   // Your username
+//   user: "root",
 
-  // Your password
-  password: "",
-  database: "employee-databaseDB"
-});
+//   // Your password
+//   password: "",
+//   database: "employee-databaseDB"
+// });
 
-connection.connect(function (err) {
-  if (err) throw err;
+// connection.connect(function (err) {
+//   if (err) throw err;
   runEmployeeData();
-});
+// });
 
 function runEmployeeData() {
   inquirer
@@ -51,7 +51,7 @@ function runEmployeeData() {
     .then(function (answer) {
       switch (answer.action) {
         case "View All Employees":
-          employeeSearch();
+          functions.employeeSearch(connection);
           break;
 
         case "View All Employees by Department":
