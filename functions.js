@@ -77,7 +77,8 @@ class Functions {
           runEmployeeData();
         }
       })
-}
+    }
+
 
   removeEmpSearch() {
     this.connection.query("DELETE FROM employee WHERE ?", function (err, result) {
@@ -178,7 +179,8 @@ class Functions {
           runEmployeeData();
         }
       })
-}
+  }
+
 
 
   removeRoleSearch() {
@@ -230,8 +232,8 @@ class Functions {
         runEmployeeData();
       }
     })
+  }
 
-}
 
   removeDeptSearch() {
     this.connection.query("DELETE FROM department WHERE ?", function (err, result) {
