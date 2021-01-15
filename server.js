@@ -1,27 +1,12 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-const functions = require("functions.js");
+const functions = require("./functions");
+const connection = require("./connection");
 
 
-// const connection = mysql.createConnection({
-//   host: "localhost",
+runEmployeeData();
 
-//   // Your port; if not 3306
-//   port: 3306,
-
-//   // Your username
-//   user: "root",
-
-//   // Your password
-//   password: "",
-//   database: "employee-databaseDB"
-// });
-
-// connection.connect(function (err) {
-//   if (err) throw err;
-  runEmployeeData();
-// });
 
 function runEmployeeData() {
   inquirer
@@ -55,55 +40,55 @@ function runEmployeeData() {
           break;
 
         case "View All Employees by Department":
-          employeeDeptSearch();
+          functions.employeeDeptSearch(connection);
           break;
 
         case "View All Employees by Manager":
-          employeeMangSearch();
+          functions.employeeMangSearch(connection);
           break;
 
         case "Add Employee":
-          addEmpSearch();
+          functions.addEmpSearch(connection);
           break;
 
         case "Remove Employee":
-          removeEmpSearch();
+          functions.removeEmpSearch(connection);
           break;
 
         case "Update Employee Role":
-          updateEmpRoleSearch();
+          functions.updateEmpRoleSearch(connection);
           break;
 
         case "Update Employee Manager":
-          updateEmpMangSearch();
+          functions.updateEmpMangSearch(connection);
           break;
 
         case "View All Roles":
-          rolesSearch();
+          functions.rolesSearch(connection);
           break;
 
         case "Add Role":
-          addRoleSearch();
+          functions.addRoleSearch(connection);
           break;
 
         case "Remove Role":
-          removeRoleSearch();
+          functions.removeRoleSearch(connection);
           break;
 
         case "View All Departments":
-          deptSearch();
+          functions.deptSearch(connection);
           break;
 
         case "Add Department":
-          addDeptSearch();
+          functions.addDeptSearch(connection);
           break;
 
         case "Remove Department":
-          removeDeptSearch();
+          functions.removeDeptSearch(connection);
           break;
 
         case "View Total Budget":
-          totalBudgetSearch();
+          functions.totalBudgetSearch(connection);
           break;
 
 
