@@ -76,7 +76,7 @@ class Functions {
 
           runEmployeeData();
         }
-      })
+      }));
     }
 
 
@@ -92,8 +92,7 @@ class Functions {
       console.log(res.affectedRows + " employee deleted!\n");
       // Call runEmployeeData AFTER the DELETE completes
       runEmployeeData();
-    }
-    );
+    });
   }
 
   updateEmpRoleSearch() {
@@ -145,7 +144,7 @@ class Functions {
   }
 
   addRoleSearch() {
-    inquirer.prompt(
+    inquirer.prompt([
       {
 
         type: "input",
@@ -162,7 +161,7 @@ class Functions {
 
       }
 
-    )
+    ])
       .then(this.connection.query("INSERT INTO role SET ?", function (err, result) {
         [
           {
@@ -178,7 +177,7 @@ class Functions {
           console.log(result);
           runEmployeeData();
         }
-      })
+      }));
   }
 
 
@@ -193,8 +192,7 @@ class Functions {
       console.log(res.affectedRows + " role deleted!\n");
       // Call runEmployeeData AFTER the DELETE completes
       runEmployeeData();
-    }
-    );
+    });
   }
 
   deptSearch() {
@@ -231,7 +229,7 @@ class Functions {
         console.log(result);
         runEmployeeData();
       }
-    })
+    }));
   }
 
 
@@ -239,8 +237,7 @@ class Functions {
     this.connection.query("DELETE FROM department WHERE ?", function (err, result) {
       [{
         name: "Example2"
-      }
-      ]
+      }]
       if (err) throw err;
       console.log(res.affectedRows + " department deleted!\n");
       // Call runEmployeeData AFTER the DELETE completes
