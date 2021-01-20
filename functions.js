@@ -5,20 +5,20 @@ class Functions {
   constructor(connection) {
     this.connection = connection;
   }
+  // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
+  findAllEmployees() {
+    return this.connection.query(
+      "SELECT * from employee;"
+    );
+  }
 
   employeeSearch() {
-    this.connection.query("SELECT * FROM employee", function (err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.table(result);
-        runEmployeeData();
-      }
-    });
+    console.log("In employee search");
+    return this.connection.query("SELECT * FROM employee");
   }
 
   employeeDeptSearch() {
-    this.connection.query("SELECT * FROM employee GROUP BY role_id", function (err, result) {
+    return this.connection.query("SELECT * FROM employee GROUP BY role_id", function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -29,7 +29,7 @@ class Functions {
   }
 
   employeeMangSearch() {
-    this.connection.query("SELECT * FROM employee GROUP BY manager_id", function (err, result) {
+    return this.connection.query("SELECT * FROM employee GROUP BY manager_id", function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -77,11 +77,11 @@ class Functions {
           runEmployeeData();
         }
       }));
-    }
+  }
 
 
   removeEmpSearch() {
-    this.connection.query("DELETE FROM employee WHERE ?", function (err, result) {
+   return this.connection.query("DELETE FROM employee WHERE ?", function (err, result) {
       [
         {
           first_name: "Test",
@@ -96,7 +96,7 @@ class Functions {
   }
 
   updateEmpRoleSearch() {
-    this.connection.query("UPDATE employee SET ? WHERE ?", function (err, result) {
+    return this.connection.query("UPDATE employee SET ? WHERE ?", function (err, result) {
 
       [
         {
@@ -114,7 +114,7 @@ class Functions {
   }
 
   updateEmpMangSearch() {
-    this.connection.query("UPDATE employee SET ? WHERE ?", function (err, result) {
+    return this.connection.query("UPDATE employee SET ? WHERE ?", function (err, result) {
 
       [
         {
@@ -133,7 +133,7 @@ class Functions {
 
 
   rolesSearch() {
-    this.connection.query("SELECT * FROM role", function (err, result) {
+    return this.connection.query("SELECT * FROM role", function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -183,7 +183,7 @@ class Functions {
 
 
   removeRoleSearch() {
-    this.connection.query("DELETE FROM role WHERE ?", function (err, result) {
+    return this.connection.query("DELETE FROM role WHERE ?", function (err, result) {
       {
         name: "Example"
       }
@@ -196,7 +196,7 @@ class Functions {
   }
 
   deptSearch() {
-    this.connection.query("SELECT * FROM department", function (err, result) {
+    return this.connection.query("SELECT * FROM department", function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -234,7 +234,7 @@ class Functions {
 
 
   removeDeptSearch() {
-    this.connection.query("DELETE FROM department WHERE ?", function (err, result) {
+    return this.connection.query("DELETE FROM department WHERE ?", function (err, result) {
       [{
         name: "Example2"
       }]
@@ -247,7 +247,7 @@ class Functions {
   }
 
   totalBudgetSearch() {
-    this.connection.query("SELECT * FROM employee", function (err, result) {
+    return this.connection.query("SELECT * FROM employee", function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -257,4 +257,4 @@ class Functions {
     });
   }
 }
-module.exports = new Function(connection);
+module.exports = new Functions(connection);
