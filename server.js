@@ -2,13 +2,15 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 const functions = require("./functions");
-const connection = require("./connection");
+// const connection  = require("./connection");
 
 
-runEmployeeData();
+
+
 
 
 function runEmployeeData() {
+  console.log("Welcome to employee tracker")
   inquirer
     .prompt({
       name: "action",
@@ -34,61 +36,63 @@ function runEmployeeData() {
       ]
     })
     .then(function (answer) {
+      console.log("Answer?", answer.action)
       switch (answer.action) {
         case "View All Employees":
-          functions.employeeSearch(connection);
+          functions.employeeSearch();
+          // viewEmployees();
           break;
 
         case "View All Employees by Department":
-          functions.employeeDeptSearch(connection);
+          functions.employeeDeptSearch();
           break;
 
         case "View All Employees by Manager":
-          functions.employeeMangSearch(connection);
+          functions.employeeMangSearch();
           break;
 
         case "Add Employee":
-          functions.addEmpSearch(connection);
+          functions.addEmpSearch();
           break;
 
         case "Remove Employee":
-          functions.removeEmpSearch(connection);
+          functions.removeEmpSearch();
           break;
 
         case "Update Employee Role":
-          functions.updateEmpRoleSearch(connection);
+          functions.updateEmpRoleSearch();
           break;
 
         case "Update Employee Manager":
-          functions.updateEmpMangSearch(connection);
+          functions.updateEmpMangSearch();
           break;
 
         case "View All Roles":
-          functions.rolesSearch(connection);
+          functions.rolesSearch();
           break;
 
         case "Add Role":
-          functions.addRoleSearch(connection);
+          functions.addRoleSearch();
           break;
 
         case "Remove Role":
-          functions.removeRoleSearch(connection);
+          functions.removeRoleSearch();
           break;
 
         case "View All Departments":
-          functions.deptSearch(connection);
+          functions.deptSearch();
           break;
 
         case "Add Department":
-          functions.addDeptSearch(connection);
+          functions.addDeptSearch();
           break;
 
         case "Remove Department":
-          functions.removeDeptSearch(connection);
+          functions.removeDeptSearch();
           break;
 
         case "View Total Budget":
-          functions.totalBudgetSearch(connection);
+          functions.totalBudgetSearch();
           break;
 
 
@@ -96,4 +100,4 @@ function runEmployeeData() {
     });
 }
 
-
+runEmployeeData();
