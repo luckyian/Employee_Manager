@@ -10,9 +10,8 @@ const functions = require("./functions");
 
 
 function runEmployeeData() {
-  console.log("Welcome to employee tracker")
-  inquirer
-    .prompt({
+  console.log("Welcome to employee tracker");
+  inquirer.prompt({
       name: "action",
       type: "rawlist",
       message: "What would you like to do?",
@@ -34,10 +33,11 @@ function runEmployeeData() {
 
 
       ]
-    })
-    .then(function (answer) {
-      console.log("Answer?", answer.action)
-      switch (answer.action) {
+    }).then(response => {
+      let action = response.action;
+      console.log(action);
+      console.log("Answer?", action);
+      switch (action) {
         case "View All Employees":
           functions.employeeSearch();
           // viewEmployees();
