@@ -18,12 +18,12 @@ class Functions {
   }
 
   employeeDeptSearch() {
-    return this.connection.query("SELECT * FROM employee GROUP BY role_id", function (err, result) {
+    return this.connection.query("SELECT * FROM employee GROUP BY roles_id", function (err, result) {
       if (err) {
         console.log(err);
       } else {
         console.table(result);
-        runEmployeeData();
+        start();
       }
     });
   }
@@ -34,7 +34,7 @@ class Functions {
         console.log(err);
       } else {
         console.table(result);
-        runEmployeeData();
+        start();
       }
     });
   }
@@ -65,7 +65,7 @@ class Functions {
           {
             first_name: this.first_name,
             last_name: this.last_name,
-            role_id: 50,
+            roles_id: 50,
             manager_id: 2
           }]
         if (err) {
@@ -74,7 +74,7 @@ class Functions {
           // Add string message of "added employee"
           console.log(result);
 
-          runEmployeeData();
+          start();
         }
       }));
   }
@@ -90,8 +90,8 @@ class Functions {
       ]
       if (err) throw err;
       console.log(res.affectedRows + " employee deleted!\n");
-      // Call runEmployeeData AFTER the DELETE completes
-      runEmployeeData();
+      // Call start AFTER the DELETE completes
+      start();
     });
   }
 
@@ -100,7 +100,7 @@ class Functions {
 
       [
         {
-          role_id: 20
+          roles_id: 20
         }
       ]
       if (err) {
@@ -108,7 +108,7 @@ class Functions {
       } else {
         // Add "Updated employee"
         console.table(result);
-        runEmployeeData();
+        start();
       }
     });
   }
@@ -126,19 +126,19 @@ class Functions {
       } else {
         // Add "Updated employee"
         console.log(result);
-        runEmployeeData();
+        start();
       }
     });
   }
 
 
   rolesSearch() {
-    return this.connection.query("SELECT * FROM role", function (err, result) {
+    return this.connection.query("SELECT * FROM roles", function (err, result) {
       if (err) {
         console.log(err);
       } else {
         console.table(result);
-        runEmployeeData();
+        start();
       }
     });
   }
@@ -162,10 +162,10 @@ class Functions {
       }
 
     ])
-      .then(this.connection.query("INSERT INTO role SET ?", function (err, result) {
+      .then(this.connection.query("INSERT INTO roles SET ?", function (err, result) {
         [
           {
-            role: this.role,
+            title: this.role,
             salary: parseInt(this.salary),
             department_id: 50,
 
@@ -175,7 +175,7 @@ class Functions {
         } else {
           // Add "Added role"
           console.log(result);
-          runEmployeeData();
+          start();
         }
       }));
   }
@@ -183,15 +183,15 @@ class Functions {
 
 
   removeRoleSearch() {
-    return this.connection.query("DELETE FROM role WHERE ?", function (err, result) {
+    return this.connection.query("DELETE FROM roles WHERE ?", function (err, result) {
       {
-        name: "Example"
+        title: "Example"
       }
 
       if (err) throw err;
       console.log(res.affectedRows + " role deleted!\n");
-      // Call runEmployeeData AFTER the DELETE completes
-      runEmployeeData();
+      // Call start AFTER the DELETE completes
+      start();
     });
   }
 
@@ -201,7 +201,7 @@ class Functions {
         console.log(err);
       } else {
         console.table(result);
-        runEmployeeData();
+        start();
       }
     });
   }
@@ -227,7 +227,7 @@ class Functions {
       } else {
         // Add "Added department"
         console.log(result);
-        runEmployeeData();
+        start();
       }
     }));
   }
@@ -240,8 +240,8 @@ class Functions {
       }]
       if (err) throw err;
       console.log(res.affectedRows + " department deleted!\n");
-      // Call runEmployeeData AFTER the DELETE completes
-      runEmployeeData();
+      // Call start AFTER the DELETE completes
+      start();
     }
     );
   }
@@ -252,7 +252,7 @@ class Functions {
         console.log(err);
       } else {
         console.table(result);
-        runEmployeeData();
+        start();
       }
     });
   }
