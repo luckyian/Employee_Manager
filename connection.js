@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const util = require("util");
+// const util = require("util");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
   // My password
   password: "187onacop",
-  database: "employee-databaseDB"
+  database: "employee_databaseDB"
 });
 connection.connect();
 
