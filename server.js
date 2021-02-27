@@ -1,8 +1,4 @@
-const mysql = require("mysql");
 const inquirer = require("inquirer");
-const consoleTable = require("console.table");
-const functions = require("./functions");
-// const { prompt } = require("inquirer");
 const connection = require("./connection");
 
 
@@ -65,6 +61,8 @@ function employee() {
 
       "Update Employee Role",
 
+      "Main Menu",
+
       "Quit"
 
     ]
@@ -87,7 +85,9 @@ function employee() {
         updateEmpRoleSearch();
         break;
 
-
+        case "Main Menu": 
+        start();
+        break;
 
       case "Quit": 
         quit();
@@ -102,7 +102,9 @@ function role() {
     message: "What would you like to do?",
     choices: [
       "View All Roles",
-      "Add Role"
+      "Add Role",
+      "Main Menu",
+      "Quit"
 
     ]
   }).then((response) => {
@@ -116,6 +118,9 @@ function role() {
         addRoleSearch();
         break;
 
+        case "Main Menu": 
+        start();
+        break;
 
         case "Quit": 
         quit();
@@ -133,7 +138,9 @@ function department() {
     message: "What would you like to do?",
     choices: [
       "View All Departments",
-      "Add Department"
+      "Add Department",
+      "Main Menu",
+      "Quit"
     ]
   }).then(response => {
     let action = response.action;
@@ -148,6 +155,9 @@ function department() {
         addDeptSearch();
         break;
 
+        case "Main Menu": 
+        start();
+        break;
 
 
         case "Quit": 
