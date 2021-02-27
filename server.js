@@ -19,7 +19,8 @@ function start() {
     choices: [
       "Employee Menu",
       "Role Menu",
-      "Departments Menu"
+      "Departments Menu",
+      "Quit"
 
 
     ]
@@ -42,12 +43,12 @@ function start() {
         break;
 
 
-      default:
+        case "Quit": 
         quit();
         break;
 
     }
-    
+
 
   });
 
@@ -62,7 +63,9 @@ function employee() {
 
       "Add Employee",
 
-      "Update Employee Role"
+      "Update Employee Role",
+
+      "Quit"
 
     ]
   }).then(response => {
@@ -72,7 +75,7 @@ function employee() {
     switch (action) {
       case "View All Employees":
         findAllEmployees();
-       
+
         break;
 
 
@@ -86,7 +89,7 @@ function employee() {
 
 
 
-      default:
+      case "Quit": 
         quit();
         break;
     }
@@ -114,7 +117,7 @@ function role() {
         break;
 
 
-      default:
+        case "Quit": 
         quit();
         break;
 
@@ -147,7 +150,7 @@ function department() {
 
 
 
-      default:
+        case "Quit": 
         quit();
         break;
     }
@@ -229,41 +232,55 @@ function addEmpSearch() {
 
 function updateEmpRoleSearch() {
 
-  connection.query('SELECT * FROM employee', function (err, res) {
+  connection.query("SELECT id, first_name, last_name FROM employee;", function (err, res) {
     if (err) throw err;
-    inquirer.prompt([{
-      name: "update",
-      type: "rawlist",
-      message: "Which employee do you want to update?",
-      choices: function () {
-        let updateEmployee = [];
-        for (var i = 0; i < res.length; i++) {
-          updateEmployee.push(`${res[i].id} ${res[i].first_name}`);
+    const map1 = res.map(array => {
+        var object = {
+            name: `${array.first_name} ${array.last_name}`,
+            value: array.id
         }
-        return updateEmployee
-      },
-    }
-    ]).then(results)
-    let employee = results.update.split(' ')
-    inquirer.prompt(
-      {
+        return object
+    });
+    inquirer
+        .prompt({
+            name: "update",
+            type: "list",
+            message: "Choose an employee to update",
+            choices: map1
+        })
+        .then(function (response) {
+            connection.query("SELECT id, title FROM roles;", function (err, res) {
+                if (err) throw err;
+                const map2 = res.map(array => {
+                    var object = {
+                        name: array.title,
+                        value: array.id
+                    }
+                    return object
+                });
+                inquirer.prompt({
+                    name: "roleUpdate",
+                    type: "list",
+                    message: "What is the employee's new role?",
+                    choices: map2
+                }).then(function (answer) {
+                    let values = [answer.roleUpdate, response.update];
+                    connection.query("UPDATE employee SET roles_id = ? WHERE id=?", values, function (err, res) {
+                        if (err) throw err;
 
-        type: "list",
-        message: "What is the new role of the employee?",
-        choices: [1, 2, 3, 4],
-        name: "roles_id"
-      })
-      .then(function (results) {
+                        connection.query("SELECT * FROM employee WHERE id=?", response.update, function (err, res) {
+                            if (err) throw err;
+                            console.table(res);
+                            start();
+                        }
+                        );
+                    })
+                })
+            })
+        })
+});
+};
 
-        connection.query("UPDATE employee SET ? WHERE ? ", employee, roles_id);
-        console.table(res);
-        console.log("Employee was updated")
-
-        start();
-      });
-
-  });
-}
 
 
 
@@ -308,22 +325,22 @@ function addRoleSearch() {
     .then(function (results) {
 
 
-      connection.query("INSERT INTO roles SET ?", 
-        
-          {
-            title: results.roles,
-            salary: parseInt(results.salary),
-            department_id: results.department_id,
+      connection.query("INSERT INTO roles SET ?",
 
-          }
+        {
+          title: results.roles,
+          salary: parseInt(results.salary),
+          department_id: results.department_id,
+
+        }
       );
-          // Add "Added role"
-          console.log(results);
-          start();
-        
-        });
-    
-    
+      // Add "Added role"
+      console.log(results);
+      start();
+
+    });
+
+
 }
 
 
@@ -340,33 +357,31 @@ function deptSearch() {
 }
 
 function addDeptSearch() {
-  inquirer.prompt(
-    [{
+  inquirer.prompt([
+    {
 
       type: "input",
       message: "What is the department's name?",
       name: "title"
 
     }
-    ]
-  ).then(function (result) {
-    (this.connection.query("INSERT INTO department SET ?", function (err, result) {
 
+  ]).then(function (results) {
+    connection.query("INSERT INTO department SET ?",
       {
-        title: this.title
+title: results.title
+      })
 
-      }
-      if (err) {
-        console.log(err);
-      } else {
-        // Add "Added department"
-        console.log(result);
-        start();
-      }
 
-    }));
-  })
+    // Add "Added department"
+    console.log(results);
+    start();
+
+
+  }
+  )
 }
+
 
 
 
